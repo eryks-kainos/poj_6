@@ -21,7 +21,7 @@ public class UsersService {
                 return user;
             }
         }
-        throw new RuntimeException("No user found for id: " + id);
+        return null;
     }
 
     public List<UserDTO> getAllUsers() {
