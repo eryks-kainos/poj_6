@@ -25,6 +25,7 @@ public class UsersService {
     }
 
     public List<UserDTO> getAllUsers() {
+        System.out.println("wolam o wszystkich userow");
         return usersList;
     }
 }
