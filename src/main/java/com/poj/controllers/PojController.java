@@ -3,6 +3,7 @@ package com.poj.controllers;
 import com.poj.dtos.AdminDTO;
 import com.poj.dtos.UserDTO;
 import com.poj.services.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,9 @@ public class PojController {
 
     private final UsersService usersService;
 
-    public PojController() {
-        this.usersService = new UsersService();
+    @Autowired
+    public PojController(UsersService usersService) {
+        this.usersService = usersService;
     }
 
     @GetMapping("/poj")
@@ -44,12 +46,18 @@ public class PojController {
     }
 
     @PutMapping("/poj/admin")
-    public void putUser(@RequestBody AdminDTO admin) {
+    public void putAdmin(@RequestBody AdminDTO admin) {
         usersService.persistUser(admin);
     }
+
 
     @GetMapping("/poj/users")
     public List<UserDTO> getAllUsers() {
         return usersService.getAllUsers();
+    }
+
+    @DeleteMapping("/poj/user/{id}")
+    public void deleteUser(@RequestParam Integer id) {
+        usersService.deleteUser(id);
     }
 }
